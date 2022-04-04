@@ -14,5 +14,8 @@ namespace BlazorChat.Shared
         public DateTime CreatedDate { get; set; }
         public virtual ApplicationUser FromUser { get; set; }
         public virtual ApplicationUser ToUser { get; set; }
+
+        public bool IsTask { get; set; }
+        public bool Complete { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace BlazorChat.Client.Pages
         [Parameter] public string CurrentMessage { get; set; }
         [Parameter] public string CurrentUserId { get; set; }
         [Parameter] public string CurrentUserEmail { get; set; }
+        public bool IsTask { get; set; }
         private List<ChatMessage> messages = new List<ChatMessage>();
         private async Task SubmitAsync()
         {
@@ -26,8 +27,8 @@ namespace BlazorChat.Client.Pages
                 {
                     Message = CurrentMessage,
                     ToUserId = ContactId,
-                    CreatedDate = DateTime.Now
-
+                    CreatedDate = DateTime.Now,
+                    IsTask = IsTask
                 };
                 await _chatManager.SaveMessageAsync(chatHistory);
                 chatHistory.FromUserId = CurrentUserId;
@@ -35,6 +36,22 @@ namespace BlazorChat.Client.Pages
                 CurrentMessage = string.Empty;
             }
         }
+
+        public async Task ConvertToTask(long id)
+        {
+            var message = messages.FirstOrDefault(x => x.Id == id);
+            message.IsTask = true;
+            await _chatManager.SaveMessageAsync(message);
+        }
+
+        public async Task CompleteTask(long id)
+        {
+            var message = messages.FirstOrDefault(x => x.Id == id);
+            message.IsTask = true;
+            message.Complete = true;
+            await _chatManager.SaveMessageAsync(message);
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await _jsRuntime.InvokeAsync<string>("ScrollToBottom", "chatContainer");
