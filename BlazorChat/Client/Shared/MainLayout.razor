@@ -5,7 +5,7 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudLayout>
-    <MudAppBar Elevation="0" Color="Color.Dark">
+    <MudAppBar Elevation="0" Color="Color.Primary">
         <MudText Typo="Typo.h6" Class="ml-4">Chat Hub</MudText>
         <MudAppBarSpacer />
         <LoginDisplay />
@@ -15,7 +15,7 @@
     </MudDrawer>
     <MudMainContent>
         <MudToolBar DisableGutters="true">
-            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Dark" OnClick="@((e) => DrawerToggle())" Class="ml-3" />
+            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Primary" OnClick="@((e) => DrawerToggle())" Class="ml-3" />
         </MudToolBar>
         <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
             <CascadingValue Value="hubConnection">
